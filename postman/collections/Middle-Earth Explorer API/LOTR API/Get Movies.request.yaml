@@ -1,0 +1,5 @@
+$kind: http-request
+name: Get Movies
+url: "{{baseUrl}}/lotr/movies"
+method: GET
+order: 4495949114396695

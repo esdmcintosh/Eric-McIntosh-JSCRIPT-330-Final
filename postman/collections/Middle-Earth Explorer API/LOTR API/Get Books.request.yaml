@@ -1,0 +1,5 @@
+$kind: http-request
+name: Get Books
+url: "{{baseUrl}}/lotr/books"
+method: GET
+order: 2106746537507256

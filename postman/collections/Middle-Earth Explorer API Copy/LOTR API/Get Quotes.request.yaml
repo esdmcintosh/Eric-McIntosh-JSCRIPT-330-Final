@@ -1,0 +1,5 @@
+$kind: http-request
+name: Get Quotes
+url: "{{baseUrl}}/lotr/quotes"
+method: GET
+order: 4241440165926212

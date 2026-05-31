@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/lotr/characters"
+method: GET
+order: 1780184576087

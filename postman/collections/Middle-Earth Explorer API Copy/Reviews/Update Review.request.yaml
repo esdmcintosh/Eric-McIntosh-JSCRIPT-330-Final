@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{baseUrl}}/reviews/REVIEW_ID"
+method: PUT
+body:
+  type: json
+  content: "{\r\n  \"rating\": 4\r\n}"
+order: 4382175334582333

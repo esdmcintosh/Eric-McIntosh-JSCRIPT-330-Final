@@ -1,0 +1,6 @@
+name: Local Development
+values:
+  - key: baseUrl
+    value: ''
+  - key: token
+    value: ''

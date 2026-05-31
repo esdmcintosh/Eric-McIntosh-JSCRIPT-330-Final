@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{baseUrl}}/reviews"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"Samwise Review\",\r
+
+    \  \"content\": \"Best character in Middle-earth\",\r
+
+    \  \"rating\": 5\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+order: 1780184191583

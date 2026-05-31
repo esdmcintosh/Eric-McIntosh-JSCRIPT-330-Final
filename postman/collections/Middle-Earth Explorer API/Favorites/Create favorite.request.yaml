@@ -1,0 +1,20 @@
+$kind: http-request
+name: Create favorite
+url: "{{baseUrl}}/favorites"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"itemType\": \"character\",\r
+
+    \  \"itemId\": \"123\",\r
+
+    \  \"name\": \"Gandalf\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+order: 1780183863425

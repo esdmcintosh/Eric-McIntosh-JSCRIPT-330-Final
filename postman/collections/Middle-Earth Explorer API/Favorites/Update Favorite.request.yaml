@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/favorites/FAVORITE_ID"
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Gandalf the White\"\r
+
+    }"
+order: 1899877267373004

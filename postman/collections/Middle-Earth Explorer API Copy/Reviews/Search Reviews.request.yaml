@@ -1,0 +1,7 @@
+$kind: http-request
+name: Search Reviews
+url: "{{baseUrl}}/reviews/search?q=Samwise"
+method: GET
+queryParams:
+  q: Samwise
+order: 4363065362659604

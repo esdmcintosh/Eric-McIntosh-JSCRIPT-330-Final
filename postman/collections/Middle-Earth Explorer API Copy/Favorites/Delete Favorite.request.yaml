@@ -1,0 +1,12 @@
+$kind: http-request
+name: Delete Favorite
+url: "{{baseUrl}}/favorites/FAVORITE_ID"
+method: DELETE
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Gandalf the White\"\r
+
+    }"
+order: 3803608633579108
