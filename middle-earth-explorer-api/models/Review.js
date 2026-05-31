@@ -1,10 +1,27 @@
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
-  userId: mongoose.Schema.Types.ObjectId,
-  title: String,
-  content: String,
-  rating: Number
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
+
+  title: {
+    type: String,
+    required: true
+  },
+
+  content: {
+    type: String,
+    required: true
+  },
+
+  rating: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5
+  }
 });
 
 reviewSchema.index({
@@ -12,4 +29,7 @@ reviewSchema.index({
   content: 'text'
 });
 
-module.exports = mongoose.model('Review', reviewSchema);
+module.exports = mongoose.model(
+  'Review',
+  reviewSchema
+);

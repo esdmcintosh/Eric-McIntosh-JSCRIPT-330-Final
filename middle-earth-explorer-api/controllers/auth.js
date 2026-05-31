@@ -1,12 +1,34 @@
 const bcrypt = require('bcrypt');
+
 const jwt = require('jsonwebtoken');
+
 const User = require('../models/User');
 
 exports.register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const {
+      username,
+      email,
+      password
+    } = req.body;
 
-    const passwordHash = await bcrypt.hash(password, 10);
+    const existingUser =
+      await User.findOne({
+        $or: [
+          { email },
+          { username }
+        ]
+      });
+
+    if (existingUser) {
+      return res.status(400).json({
+        error:
+          'User already exists'
+      });
+    }
+
+    const passwordHash =
+      await bcrypt.hash(password, 10);
 
     const user = await User.create({
       username,
@@ -14,38 +36,60 @@ exports.register = async (req, res) => {
       passwordHash
     });
 
-    res.status(201).json(user);
+    res.status(201).json({
+      id: user._id,
+      username: user.username,
+      email: user.email
+    });
   } catch (err) {
-    res.status(400).json(err.message);
+    res.status(500).json({
+      error: err.message
+    });
   }
 };
 
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const {
+      email,
+      password
+    } = req.body;
 
-    const user = await User.findOne({ email });
+    const user =
+      await User.findOne({ email });
 
     if (!user) {
-      return res.status(401).json({ error: 'Invalid login' });
+      return res.status(401).json({
+        error: 'Invalid credentials'
+      });
     }
 
-    const valid = await bcrypt.compare(
-      password,
-      user.passwordHash
-    );
+    const validPassword =
+      await bcrypt.compare(
+        password,
+        user.passwordHash
+      );
 
-    if (!valid) {
-      return res.status(401).json({ error: 'Invalid login' });
+    if (!validPassword) {
+      return res.status(401).json({
+        error: 'Invalid credentials'
+      });
     }
 
     const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET
+      {
+        id: user._id
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '1d'
+      }
     );
 
     res.json({ token });
   } catch (err) {
-    res.status(500).json(err.message);
+    res.status(500).json({
+      error: err.message
+    });
   }
 };
